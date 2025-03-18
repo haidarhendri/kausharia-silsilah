@@ -10,8 +10,8 @@ use App\User;
 use App\UserMetadata;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
-use Storage;
 
 class UsersController extends Controller
 {
@@ -218,7 +218,7 @@ class UsersController extends Controller
         $user->photo_path = $request->photo->store('images');
         $user->save();
 
-        OptimizeImages::dispatch([$user->photo_path]);
+        // OptimizeImages::dispatch([$user->photo_path]);
 
         return back();
     }
