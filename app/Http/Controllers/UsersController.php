@@ -156,6 +156,7 @@ class UsersController extends Controller
     public function update(UpdateRequest $request, User $user)
     {
         $userAttributes = $request->validated();
+        // dd($userAttributes);
         $user->update($userAttributes);
         $userAttributes = collect($userAttributes);
 

@@ -56,3 +56,25 @@
         </tbody>
     </table>
 </div>
+
+@section('ext_css')
+<link href="{{ asset('css/plugins/jquery.datetimepicker.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('css/plugins/select2.min.css') }}">
+@endsection
+
+@section('script')
+<script src="{{ asset('js/plugins/jquery.datetimepicker.js') }}"></script>
+<script src="{{ asset('js/plugins/select2.min.js') }}"></script>
+
+<script>
+    (function() {
+        $('select').select2();
+        $('#dob').datetimepicker({
+            timepicker:false,
+            format:'Y-m-d',
+            closeOnDateSelect: true,
+            scrollInput: false
+        });
+    })();
+</script>
+@endsection

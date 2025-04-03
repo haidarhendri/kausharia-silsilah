@@ -36,6 +36,9 @@
                     {!! FormField::text('add_child_birth_order', ['label' => __('user.birth_order'), 'type' => 'number', 'min' => 1]) !!}
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12">{!! FormField::text('dob', ['label' => __('user.dob'), 'placeholder' => __('app.example').' 1959-07-20']) !!}</div>
+            </div>
 
             {{ Form::submit(__('user.add_child'), ['class' => 'btn btn-success btn-sm']) }}
             {{ link_to_route('users.show', __('app.cancel'), [$user->id], ['class' => 'btn btn-default btn-sm']) }}

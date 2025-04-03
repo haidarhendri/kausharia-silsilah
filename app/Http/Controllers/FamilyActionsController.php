@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Couple;
+use DateTime;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FamilyActionsController extends Controller
 {
@@ -87,6 +89,8 @@ class FamilyActionsController extends Controller
             'add_child_birth_order' => 'nullable|numeric',
         ]);
 
+        $date = DateTime::createFromFormat("Y-m-d", $request->get('dob'));
+
         $child = new User;
         $child->id = Uuid::uuid4()->toString();
         $child->name = $request->get('add_child_name');
@@ -94,9 +98,11 @@ class FamilyActionsController extends Controller
         $child->gender_id = $request->get('add_child_gender_id');
         $child->parent_id = $request->get('add_child_parent_id');
         $child->birth_order = $request->get('add_child_birth_order');
+        $child->dob = $date->format("Y-m-d");
+        $child->yob = $date->format("Y");
         $child->manager_id = auth()->id();
 
-        \DB::beginTransaction();
+        DB::beginTransaction();
         $child->save();
 
         if ($request->get('add_child_parent_id')) {
@@ -110,10 +116,9 @@ class FamilyActionsController extends Controller
             } else {
                 $child->setMother($user);
             }
-
         }
 
-        \DB::commit();
+        DB::commit();
 
         return back();
     }
